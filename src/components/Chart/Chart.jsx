@@ -1,37 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { fetchData } from '../../api'
-import { ResponsiveBar } from '@nivo/bar'
+import React, { useEffect, useState } from 'react';
+import { ResponsiveBar } from '@nivo/bar';
 
-const Chart = () => {
-    const [beerData, setBeerData] = useState([]);
+const Chart = (data) => {
 
-    useEffect(() => {
-        const fetchAPI = async () => {
-           setBeerData(await fetchData());
-        }
-
-        fetchAPI();
-    }, []);
-
-    const modifiedData = []
-
-    for(let i=0; i<beerData.length; i++){
-        modifiedData.push(
-            {
-                first_brewed: beerData[i].first_brewed,
-                name: beerData[i].name,
-                abv: beerData[i].abv
-                
-                
-            }
-        )
-    }
-
-    console.log(modifiedData)
+    
 
     const barChart = (
         <ResponsiveBar
-        data={modifiedData}
+        data={data}
         indexBy="first_brewed"
         keys={['abv']}
         margin={{ top: 50, right: 130, bottom: 100, left: 160 }}
@@ -56,7 +32,7 @@ const Chart = () => {
     ) 
 
     return (
-        <div className="table" style={{ height: "800px" }}>{barChart}</div>
+        <div className="table" style={{ height: "800px" }}></div>
     )
 }
 
